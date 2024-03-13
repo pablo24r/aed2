@@ -81,7 +81,7 @@ int main(int argc, char *argv[]) {
     	    	inicioActual=i+1;
     	}
     }
-    printf("Posicion inicial %d: longitud de la cadena: %d\n", inicioMAX, longitudMAX);
+    printf("Posicion inicial %d: longitud de la cadena: %d\n", inicioMAX+1, longitudMAX);
     imprimirSubcadena(cadena, inicioMAX, longitudMAX);
 
     // Libera la memoria reservada para la cadena
