@@ -25,11 +25,20 @@ char* generarCadenaAleatoria(int longitud) {
     return cadena;
 }
 
+// Función para imprimir la subcadena C
+void imprimirSubcadena(char A[], int inicio, int longitud) {
+    printf("Subcadena C: ");
+    for (int i = inicio; i < inicio + longitud; i++) {
+        printf("%c", A[i]);
+    }
+    printf("\n");
+}
+
 int main(int argc, char *argv[]) {
 	int inicioMAX=0;
 	int longitudMAX=0;
 	
-	int inicioActual=0;
+	int inicioActual=1;
 	int longitudActual=1;
 
     // Verifica que se haya pasado un argumento para la longitud de la cadena
@@ -60,6 +69,7 @@ int main(int argc, char *argv[]) {
     	}*/
     	if( cadena[i] == cadena[i+1] || cadena[i] + 1 == cadena[i+1] ){
     		longitudActual++;
+    		//printf("1:%c,2:%c\n",cadena[i],cadena[i+1]); Descomentar para ver que funciona bien
     	}
     	else{
     		if(longitudActual > longitudMAX){
@@ -70,15 +80,8 @@ int main(int argc, char *argv[]) {
     	    inicioActual=i+1;
     	}
     }
-    char subcadenaB[longitudMAX];
-    int contador=0;
-    for (int i=inicioMAX; i< longitudMAX; i++){
-    	subcadenaB[contador] = cadena[i];
-    	contador++;
-    }
     printf("Posicion inicial %d: longitud de la cadena: %d\n", inicioMAX, longitudMAX);
-    printf("Subcadena: %s\n", subcadenaB);
-    
+    imprimirSubcadena(cadena, inicioMAX, longitudMAX);
     if('a'+ 1 == 'b')
     	printf("SI"); 
 
