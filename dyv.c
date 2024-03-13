@@ -37,8 +37,8 @@ void imprimirSubcadena(char A[], int inicio, int longitud) {
 int main(int argc, char *argv[]) {
 	int inicioMAX=0;
 	int longitudMAX=0;
-	
-	int inicioActual=1;
+
+	int inicioActual=0;
 	int longitudActual=1;
 
     // Verifica que se haya pasado un argumento para la longitud de la cadena
@@ -50,6 +50,7 @@ int main(int argc, char *argv[]) {
     // Obtiene la longitud de la cadena desde el argumento de línea de comandos
     int longitud = atoi(argv[1]);
 	int m=longitud;
+    
     // Verifica que la longitud sea válida
     if (longitud <= 0) {
         printf("La longitud debe ser un número entero positivo.\n");
@@ -77,13 +78,11 @@ int main(int argc, char *argv[]) {
     			inicioMAX = inicioActual;
     		}
     		longitudActual=1;
-    	    inicioActual=i+1;
+    	    	inicioActual=i+1;
     	}
     }
     printf("Posicion inicial %d: longitud de la cadena: %d\n", inicioMAX, longitudMAX);
     imprimirSubcadena(cadena, inicioMAX, longitudMAX);
-    if('a'+ 1 == 'b')
-    	printf("SI"); 
 
     // Libera la memoria reservada para la cadena
     free(cadena);
