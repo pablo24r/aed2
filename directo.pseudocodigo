@@ -1,0 +1,47 @@
+Función generarCadenaAleatoria(longitud):
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    tamAlfabeto = longitud de alfabeto
+    cadena = ""
+    Para cada caracter en el rango de 0 a longitud - 1:
+        cadena += alfabeto[aleatorio entre 0 y tamAlfabeto - 1]
+    Devolver cadena
+
+Función imprimirSubcadena(cadena, inicio, longitud):
+    Imprimir Subcadena C
+    
+Función principal:
+    inicioMAX = 0
+    longitudMAX = 0
+    inicioActual = 0
+    longitudActual = 1
+
+    Si cantidad de argumentos != 2:
+        Imprimir "Uso: " concatenado con el nombre del programa concatenado con " <longitud>"
+        Devolver fracaso
+
+    longitud = Convertir a entero el segundo argumento
+
+    Si longitud <= 0:
+        Imprimir "La longitud debe ser un número entero positivo."
+        Devolver fracaso
+
+    cadena = generarCadenaAleatoria(longitud)
+
+    Para cada índice i en el rango de 0 a longitud - 2:
+        Si cadena[i] es igual a cadena[i + 1] o cadena[i] + 1 es igual a cadena[i + 1]:
+            incrementar longitudActual
+        Sino:
+            Si longitudActual > longitudMAX:
+                longitudMAX = longitudActual
+                inicioMAX = inicioActual
+            longitudActual = 1
+            inicioActual = i + 1
+
+    Si longitudActual > longitudMAX:
+        longitudMAX = longitudActual
+        inicioMAX = inicioActual
+
+    Imprimir Posición inicial inicioMAX+1 : longitudMAX
+    imprimirSubcadena
+
+    Devolver éxito
