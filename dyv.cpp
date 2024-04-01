@@ -60,8 +60,8 @@ array<int,2> resolver(string cadena, int p, int m){
     }
     array<int, 2> solucion = {inicioMAXSubcadena, longitudMAXSubcadena};
 
-    cout << "Cadena: " << cadena << endl;
-    cout << "\tSolución: " << inicioMAXSubcadena+1 << "-" << longitudMAXSubcadena << endl;
+    // cout << "Cadena: " << cadena << endl;
+    // cout << "\tSolución: " << inicioMAXSubcadena+1 << "-" << longitudMAXSubcadena << endl;
     //imprimirSubcadena(cadena,inicioMAXSubcadena, longitudMAXSubcadena);
     return solucion;
 }
@@ -69,27 +69,27 @@ array<int,2> resolver(string cadena, int p, int m){
 // Combinar
 void combinar(string cadenaA, string cadenaB, int p, int m){
     if(cadenaA[cadenaA.size()-1]  == cadenaB[0] || cadenaA[cadenaA.size()-1] + 1  == cadenaB[0] ){
-        cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
+        // cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
         int inicioActual = p-1;
         int longitudActual = 2;
-        for (int i=1; i<m;i++){
-            if( cadenaA[cadenaA.size()-(i+1)] == cadenaA[cadenaA.size()-i] || cadenaA[cadenaA.size()-(i+1)] + 1 == cadenaA[cadenaA.size()-i]){
-                cout << "SIIIIIIIIIIIIIIIIIIIIIIIIIIIII" <<endl;
-                longitudActual++;
-                inicioActual--;
-                if( cadenaB[i] == cadenaB[i+1] || cadenaB[i] + 1 == cadenaB[i+1] ){
-                    longitudActual++;
-                }
-                if(longitudActual>longitudMAX){
-                    longitudMAX=longitudActual;
-                    inicioMAX=inicioActual;
-                    cout << "LONGITUD MAX: " << longitudMAX << endl;
-                }
-            }
-            else{
-                return;
-            }
-
+        // ¿Cuantos caracteres de la cadena A nos quedamos?
+        int i = m;
+        while(cadenaA[i-1] == cadenaA[i] || cadenaA[i-1] + 1 == cadenaA[i]){
+            inicioActual--;
+            longitudActual++;
+            //cout << cadenaA[i-1] << " - " << cadenaA[i] << endl;
+            i--;
+        }
+        // ¿Y de la cadena B?
+        i=0;
+        while(cadenaB[i] == cadenaB[i+1] || cadenaB[i] + 1 == cadenaB[i+1]){
+            longitudActual++;
+            // cout << cadenaB[i] << " - " << cadenaB[i+1] << endl;
+            i++;
+        }
+        if(longitudActual > longitudMAX){
+            longitudMAX=longitudActual;
+            inicioMAX=inicioActual;
         }
     }
     else return;
@@ -108,8 +108,8 @@ void dyv(string cadena, int p, int m){
         string segundaMitad = cadena.substr(n/2);
         
         // Imprimir las dos mitades
-        cout << "Primera mitad: " << primeraMitad << endl;
-        cout << "Segunda mitad: " << segundaMitad << endl;
+        // cout << "Primera mitad: " << primeraMitad << endl;
+        // cout << "Segunda mitad: " << segundaMitad << endl;
         dyv(primeraMitad, p, m);
         dyv(segundaMitad, p+n/2, m);
         combinar(primeraMitad,segundaMitad, p+n/2, m);
