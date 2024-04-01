@@ -49,7 +49,7 @@ array<int,2> resolver(string cadena, int p, int m){
                 inicioMAXSubcadena = inicioActual;
             }
             longitudActual = 1;
-            inicioActual = i + 1;
+            inicioActual = p+i + 1;
         }
     }
 
@@ -62,14 +62,46 @@ array<int,2> resolver(string cadena, int p, int m){
 
     cout << "Cadena: " << cadena << endl;
     cout << "\tSolución: " << inicioMAXSubcadena+1 << "-" << longitudMAXSubcadena << endl;
-    imprimirSubcadena(cadena,inicioMAXSubcadena, longitudMAXSubcadena);
+    //imprimirSubcadena(cadena,inicioMAXSubcadena, longitudMAXSubcadena);
     return solucion;
+}
+
+// Combinar
+void combinar(string cadenaA, string cadenaB, int p, int m){
+    if(cadenaA[cadenaA.size()-1]  == cadenaB[0] || cadenaA[cadenaA.size()-1] + 1  == cadenaB[0] ){
+        cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
+        int inicioActual = p-1;
+        int longitudActual = 2;
+        for (int i=1; i<m;i++){
+            if( cadenaA[cadenaA.size()-(i+1)] == cadenaA[cadenaA.size()-i] || cadenaA[cadenaA.size()-(i+1)] + 1 == cadenaA[cadenaA.size()-i]){
+                cout << "SIIIIIIIIIIIIIIIIIIIIIIIIIIIII" <<endl;
+                longitudActual++;
+                inicioActual--;
+                if( cadenaB[i] == cadenaB[i+1] || cadenaB[i] + 1 == cadenaB[i+1] ){
+                    longitudActual++;
+                }
+                if(longitudActual>longitudMAX){
+                    longitudMAX=longitudActual;
+                    inicioMAX=inicioActual;
+                    cout << "LONGITUD MAX: " << longitudMAX << endl;
+                }
+            }
+            else{
+                return;
+            }
+
+        }
+    }
+    else return;
 }
 
 
 // Dyv
 void dyv(string cadena, int p, int m){
-	int n = cadena.length();
+	if(longitudMAX==m){
+        return;
+    }
+    int n = cadena.length();
     
     if( n/2 >= m){
         string primeraMitad = cadena.substr(0, n/2);
@@ -79,10 +111,16 @@ void dyv(string cadena, int p, int m){
         cout << "Primera mitad: " << primeraMitad << endl;
         cout << "Segunda mitad: " << segundaMitad << endl;
         dyv(primeraMitad, p, m);
-        dyv(segundaMitad, n/2, m);
+        dyv(segundaMitad, p+n/2, m);
+        combinar(primeraMitad,segundaMitad, p+n/2, m);
     }
     else{
-        resolver(cadena, p, m);
+        array<int,2> solucion = resolver(cadena, p, m);
+        // Verifica si es la mejor
+        if (solucion[1] > longitudMAX) {
+            longitudMAX = solucion[1];
+            inicioMAX = solucion[0];
+        }
     }
 
 
@@ -90,7 +128,7 @@ void dyv(string cadena, int p, int m){
 
 int main(int argc, char *argv[]) {
 
-
+    /*
     // Verifica que se haya pasado un argumento para la longitud de la cadena
     if (argc != 2) {
         cerr << "Uso: " << argv[0] << " <longitud>" << endl;
@@ -108,7 +146,11 @@ int main(int argc, char *argv[]) {
 
     // Genera la cadena aleatoria
     string cadena = generarCadenaAleatoria(longitud);
-    int m = 50;//longitud/1000;
+    int m = 10;//longitud/1000;
+    */
+    string cadena = argv[1];
+    int longitud = cadena.length();
+    int m = 5;
     
     // Imprime la cadena generada
     cout << "Cadena de longitud " << longitud << ": " << cadena << endl;
