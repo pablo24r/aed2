@@ -7,23 +7,7 @@ using namespace std;
 
 int inicioMAX = 0;
 int longitudMAX = 0;
-
-// Función para generar la cadena aleatoria
-string generarCadenaAleatoria(int longitud) {
-    srand(time(NULL));
-    // Alfabeto
-    string alfabeto = "abcdefghijklmnopqrstuvwxyz";
-    int tamAlfabeto = alfabeto.length();
-
-    // Genera la cadena aleatoria
-    string cadena;
-    cadena.reserve(longitud);
-    for (int i = 0; i < longitud; ++i) {
-        cadena.push_back(alfabeto[rand() % tamAlfabeto]);
-    }
-
-    return cadena;
-}
+bool fin = false;
 
 // Función para imprimir la subcadena C
 void imprimirSubcadena(const string& cadena, int inicio, int longitud) {
@@ -60,31 +44,28 @@ array<int,2> resolver(string cadena, int p, int m){
     }
     array<int, 2> solucion = {inicioMAXSubcadena, longitudMAXSubcadena};
 
-    // cout << "Cadena: " << cadena << endl;
-    // cout << "\tSolución: " << inicioMAXSubcadena+1 << "-" << longitudMAXSubcadena << endl;
-    //imprimirSubcadena(cadena,inicioMAXSubcadena, longitudMAXSubcadena);
     return solucion;
 }
 
 // Combinar
 void combinar(string cadenaA, string cadenaB, int p, int m){
+    if (fin) return;
     if(cadenaA[cadenaA.size()-1]  == cadenaB[0] || cadenaA[cadenaA.size()-1] + 1  == cadenaB[0] ){
-        // cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
+        //cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
         int inicioActual = p-1;
         int longitudActual = 2;
         // ¿Cuantos caracteres de la cadena A nos quedamos?
-        int i = m;
+        int i = cadenaA.size()-1;
+        //cout << cadenaA[i-1] << " - " << cadenaA[i] << endl;
         while(cadenaA[i-1] == cadenaA[i] || cadenaA[i-1] + 1 == cadenaA[i]){
             inicioActual--;
             longitudActual++;
-            //cout << cadenaA[i-1] << " - " << cadenaA[i] << endl;
             i--;
         }
         // ¿Y de la cadena B?
         i=0;
         while(cadenaB[i] == cadenaB[i+1] || cadenaB[i] + 1 == cadenaB[i+1]){
             longitudActual++;
-            // cout << cadenaB[i] << " - " << cadenaB[i+1] << endl;
             i++;
         }
         if(longitudActual > longitudMAX){
@@ -97,19 +78,19 @@ void combinar(string cadenaA, string cadenaB, int p, int m){
 
 
 // Dyv
-void dyv(string cadena, int p, int m){
-	if(longitudMAX==m){
-        return;
+void dyv(string cadena, int p, int m){    
+    if(longitudMAX>m){
+        longitudMAX=m;
+        fin=true;
     }
-    int n = cadena.length();
     
+    if (fin) return;
+
+    int n = cadena.length();
     if( n/2 >= m){
         string primeraMitad = cadena.substr(0, n/2);
         string segundaMitad = cadena.substr(n/2);
         
-        // Imprimir las dos mitades
-        // cout << "Primera mitad: " << primeraMitad << endl;
-        // cout << "Segunda mitad: " << segundaMitad << endl;
         dyv(primeraMitad, p, m);
         dyv(segundaMitad, p+n/2, m);
         combinar(primeraMitad,segundaMitad, p+n/2, m);
@@ -128,32 +109,12 @@ void dyv(string cadena, int p, int m){
 
 int main(int argc, char *argv[]) {
 
-    /*
-    // Verifica que se haya pasado un argumento para la longitud de la cadena
-    if (argc != 2) {
-        cerr << "Uso: " << argv[0] << " <longitud>" << endl;
-        return EXIT_FAILURE;
-    }
-
-    // Obtiene la longitud de la cadena desde el argumento de línea de comandos
-    int longitud = atoi(argv[1]);
-
-    // Verifica que la longitud sea válida
-    if (longitud <= 0) {
-        cerr << "La longitud debe ser un número entero positivo." << endl;
-        return EXIT_FAILURE;
-    }
-
-    // Genera la cadena aleatoria
-    string cadena = generarCadenaAleatoria(longitud);
-    int m = 10;//longitud/1000;
-    */
     string cadena = argv[1];
     int longitud = cadena.length();
-    int m = 5;
+    int m = longitud/1000;
     
     // Imprime la cadena generada
-    cout << "Cadena de longitud " << longitud << ": " << cadena << endl;
+    // cout << "Cadena de longitud " << longitud << ": " << cadena << endl;
 
     // Dyv
     dyv(cadena, 0, m);
@@ -164,4 +125,3 @@ int main(int argc, char *argv[]) {
 
     return EXIT_SUCCESS;
 }
-

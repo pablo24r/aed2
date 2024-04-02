@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
     int longitud = atoi(argv[2]);
     int m = longitud/1000;
     srand(time(NULL));
-    string cadena = "";
+    string cadena;
     switch (letra) {
         case 'm':{ // Caso mejor
             for (int i = 0; i < longitud; ++i) {
@@ -20,10 +20,19 @@ int main(int argc, char *argv[]) {
             cout << cadena << endl;
             break;  
         }   
-        case 'M': // Caso peor
-            cout << "La letra ingresada es una 'M'." << endl;
+        case 'M':{ // Caso peor
+            string alfabeto = "abcdefghijklmnopqrstuvwxyz";
+            int tamAlfabeto = alfabeto.length();
+            cadena.reserve(longitud);
+            for (int i = 0; i < longitud-(longitud/1000); ++i) {
+                cadena.push_back(alfabeto[rand() % tamAlfabeto]);
+            }
+            for (int i = longitud-(longitud/1000); i < longitud; ++i) {
+                cadena.push_back('a');
+            }
+            cout << cadena << endl;
             break;
-        
+        }             
         case 'p':{ // Caso promedio (cadena aleatoria)
             string alfabeto = "abcdefghijklmnopqrstuvwxyz";
             int tamAlfabeto = alfabeto.length();
