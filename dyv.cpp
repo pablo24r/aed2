@@ -3,19 +3,20 @@
 #include <cstdlib>
 #include <ctime>
 #include <array>
+#include <stdio.h>
+#include <sys/time.h>
 using namespace std;
 
-int inicioMAX = 0;
-int longitudMAX = 0;
-bool fin = false;
+int inicioMAX = 0; // Inicio de la subcadena más larga encontrada
+int longitudMAX = 0; // Longitud de la subcadena más larga encontrada
+bool fin = false; // Bandera para detener la búsqueda
 
 // Función para imprimir la subcadena C
 void imprimirSubcadena(const string& cadena, int inicio, int longitud) {
     cout << "Subcadena C: " << cadena.substr(inicio, longitud) << endl;
 }
 
-
-// Resolucion
+// Resolución directa para encontrar la subcadena más larga
 array<int,2> resolver(string cadena, int p, int m){
     int inicioActual = p;
     int longitudActual = 1;
@@ -47,16 +48,14 @@ array<int,2> resolver(string cadena, int p, int m){
     return solucion;
 }
 
-// Combinar
+// Función para combinar dos subcadenas
 void combinar(string cadenaA, string cadenaB, int p, int m){
-    if (fin) return;
+    if (fin) return; // Si ya se encontró la subcadena más larga, no se realizan más combinaciones
     if(cadenaA[cadenaA.size()-1]  == cadenaB[0] || cadenaA[cadenaA.size()-1] + 1  == cadenaB[0] ){
-        //cout << "COMBINA: " << cadenaA << " + " << cadenaB << endl;
         int inicioActual = p-1;
         int longitudActual = 2;
-        // ¿Cuantos caracteres de la cadena A nos quedamos?
+        // ¿Cuántos caracteres de la cadena A nos quedamos?
         int i = cadenaA.size()-1;
-        //cout << cadenaA[i-1] << " - " << cadenaA[i] << endl;
         while(cadenaA[i-1] == cadenaA[i] || cadenaA[i-1] + 1 == cadenaA[i]){
             inicioActual--;
             longitudActual++;
@@ -68,6 +67,7 @@ void combinar(string cadenaA, string cadenaB, int p, int m){
             longitudActual++;
             i++;
         }
+        // Si la longitud de la cadena actual supera la longitud máxima encontrada hasta ahora, se actualizan los valores
         if(longitudActual > longitudMAX){
             longitudMAX=longitudActual;
             inicioMAX=inicioActual;
@@ -76,52 +76,54 @@ void combinar(string cadenaA, string cadenaB, int p, int m){
     else return;
 }
 
-
-// Dyv
+// Algoritmo de Dividir y Vencer (DyV) para encontrar la subcadena más larga
 void dyv(string cadena, int p, int m){    
     if(longitudMAX>m){
-        longitudMAX=m;
-        fin=true;
+        longitudMAX=m; // Limita la longitud máxima a m si se supera
+        fin=true; // Indica que ya se encontró la subcadena más larga
     }
     
-    if (fin) return;
+    if (fin) return; // Si ya se encontró la subcadena más larga, no se realiza más división y conquista
 
     int n = cadena.length();
     if( n/2 >= m){
         string primeraMitad = cadena.substr(0, n/2);
         string segundaMitad = cadena.substr(n/2);
         
-        dyv(primeraMitad, p, m);
-        dyv(segundaMitad, p+n/2, m);
-        combinar(primeraMitad,segundaMitad, p+n/2, m);
+        dyv(primeraMitad, p, m); // Llamada recursiva a la primera mitad
+        dyv(segundaMitad, p+n/2, m); // Llamada recursiva a la segunda mitad
+        combinar(primeraMitad,segundaMitad, p+n/2, m); // Intenta combinar las subcadenas de las mitades
     }
     else{
-        array<int,2> solucion = resolver(cadena, p, m);
-        // Verifica si es la mejor
+        array<int,2> solucion = resolver(cadena, p, m); // Resuelve el problema directamente para cadenas pequeñas
+        // Verifica si la solución encontrada es mejor que la actual y actualiza los valores si es necesario
         if (solucion[1] > longitudMAX) {
             longitudMAX = solucion[1];
             inicioMAX = solucion[0];
         }
     }
-
-
 }
 
 int main(int argc, char *argv[]) {
+    string cadena = argv[1]; // Cadena de entrada
+    int longitud = cadena.length(); // Longitud de la cadena de entrada
+    int m = longitud/1000; // Límite m para la longitud de la subcadena
 
-    string cadena = argv[1];
-    int longitud = cadena.length();
-    int m = longitud/1000;
-    
-    // Imprime la cadena generada
-    // cout << "Cadena de longitud " << longitud << ": " << cadena << endl;
+    // Medición del tiempo de la operación
+    struct timeval ti, tf;
+    double tiempo;
+    gettimeofday(&ti, NULL); // Instante inicial
 
-    // Dyv
+    // Llamada al algoritmo DyV para encontrar la subcadena más larga
     dyv(cadena, 0, m);
 
-    // Mostrar resultados
+    gettimeofday(&tf, NULL); // Instante final
+    tiempo = (tf.tv_sec - ti.tv_sec) * 1000 + (tf.tv_usec - ti.tv_usec) / 1000.0; // Calcula el tiempo transcurrido en milisegundos
+    printf("DyV ha tardado: %g milisegundos\n", tiempo); // Imprime el tiempo transcurrido
+
+    // Muestra los resultados
     cout << "Posición inicial " << inicioMAX+1 << ": Longitud de la cadena: " << longitudMAX << endl;
-    imprimirSubcadena(cadena, inicioMAX, longitudMAX);
+    imprimirSubcadena(cadena, inicioMAX, longitudMAX); // Imprime la subcadena más larga
 
     return EXIT_SUCCESS;
 }

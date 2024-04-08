@@ -1,0 +1,135 @@
+// MEJOR CASO
+pablo@pablo-msi:~/Escritorio$ ./gen m 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.028 milisegundos
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.051 milisegundos
+pablo@pablo-msi:~/Escritorio$ ./gen m 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.046 milisegundos
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.053 milisegundos
+pablo@pablo-msi:~/Escritorio$ ./gen m 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.027 milisegundos
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.049 milisegundos
+pablo@pablo-msi:~/Escritorio$ ./gen m 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.291 milisegundos
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 0.06 milisegundos
+pablo@pablo-msi:~/Escritorio$ ./gen m 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.211 milisegundos
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 0.035 milisegundos
+pablo@pablo-msi:~/Escritorio$ ./gen m 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.244 milisegundos
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Posición inicial 1: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 0.055 milisegundos
+
+
+// CASO PROMEDIO
+pablo@pablo-msi:~/Escritorio$ ./gen p 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.305 milisegundos
+Posición inicial 12: Longitud de la cadena: 5
+Subcadena C: ggggg
+Directo ha tardado: 0.092 milisegundos
+Posición inicial 12: Longitud de la cadena: 5
+Subcadena C: ggggg
+pablo@pablo-msi:~/Escritorio$ ./gen p 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.282 milisegundos
+Posición inicial 1724: Longitud de la cadena: 4
+Subcadena C: hiii
+Directo ha tardado: 0.109 milisegundos
+Posición inicial 1724: Longitud de la cadena: 4
+Subcadena C: hiii
+pablo@pablo-msi:~/Escritorio$ ./gen p 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.98 milisegundos
+Posición inicial 8165: Longitud de la cadena: 4
+Subcadena C: uvvw
+Directo ha tardado: 0.109 milisegundos
+Posición inicial 8165: Longitud de la cadena: 4
+Subcadena C: uvvw
+pablo@pablo-msi:~/Escritorio$ ./gen p 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 1.407 milisegundos
+Posición inicial 10839: Longitud de la cadena: 5
+Subcadena C: qrrrs
+Directo ha tardado: 0.924 milisegundos
+Posición inicial 10839: Longitud de la cadena: 5
+Subcadena C: qrrrs
+pablo@pablo-msi:~/Escritorio$ ./gen p 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 1.34 milisegundos
+Posición inicial 31059: Longitud de la cadena: 5
+Subcadena C: vvvvv
+Directo ha tardado: 1.021 milisegundos
+Posición inicial 31059: Longitud de la cadena: 5
+Subcadena C: vvvvv
+pablo@pablo-msi:~/Escritorio$ ./gen p 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 1.4 milisegundos
+Posición inicial 32653: Longitud de la cadena: 5
+Subcadena C: lllmm
+Directo ha tardado: 0.984 milisegundos
+Posición inicial 32653: Longitud de la cadena: 5
+Subcadena C: lllmm
+
+
+// PEOR CASO
+pablo@pablo-msi:~/Escritorio$ ./gen M 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.272 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.086 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+pablo@pablo-msi:~/Escritorio$ ./gen M 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.294 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.093 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+pablo@pablo-msi:~/Escritorio$ ./gen M 10000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 0.306 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+Directo ha tardado: 0.27 milisegundos
+Posición inicial 9991: Longitud de la cadena: 10
+Subcadena C: aaaaaaaaaa
+pablo@pablo-msi:~/Escritorio$ ./gen M 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 4.839 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 1.225 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+pablo@pablo-msi:~/Escritorio$ ./gen M 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 1.859 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 0.966 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+pablo@pablo-msi:~/Escritorio$ ./gen M 100000 > cadena.txt; ./dyv $(cat cadena.txt); ./dir $(cat cadena.txt)
+DyV ha tardado: 1.845 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+Directo ha tardado: 0.993 milisegundos
+Posición inicial 99901: Longitud de la cadena: 100
+Subcadena C: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+
